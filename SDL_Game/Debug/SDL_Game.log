@@ -1,0 +1,11 @@
+﻿  gameworld.cpp
+D:\workspace\SDLproject\Demo_Game\SDL_Game\SDL_Game\GameWorld\gameworld.cpp(57,20): warning C4473: 'printf' : not enough arguments passed for format string
+D:\workspace\SDLproject\Demo_Game\SDL_Game\SDL_Game\GameWorld\gameworld.cpp(57,20): message : placeholders and their parameters expect 1 variadic arguments, but 0 were provided
+D:\workspace\SDLproject\Demo_Game\SDL_Game\SDL_Game\GameWorld\gameworld.cpp(57,20): message : the missing variadic argument 1 is required by format string '%s'
+D:\workspace\SDLproject\Demo_Game\SDL_Game\SDL_Game\GameWorld\gameworld.cpp(87,20): warning C4473: 'printf' : not enough arguments passed for format string
+D:\workspace\SDLproject\Demo_Game\SDL_Game\SDL_Game\GameWorld\gameworld.cpp(87,20): message : placeholders and their parameters expect 1 variadic arguments, but 0 were provided
+D:\workspace\SDLproject\Demo_Game\SDL_Game\SDL_Game\GameWorld\gameworld.cpp(87,20): message : the missing variadic argument 1 is required by format string '%s'
+D:\workspace\SDLproject\Demo_Game\SDL_Game\SDL_Game\GameWorld\gameworld.cpp(92,16): warning C4473: 'printf' : not enough arguments passed for format string
+D:\workspace\SDLproject\Demo_Game\SDL_Game\SDL_Game\GameWorld\gameworld.cpp(92,16): message : placeholders and their parameters expect 1 variadic arguments, but 0 were provided
+D:\workspace\SDLproject\Demo_Game\SDL_Game\SDL_Game\GameWorld\gameworld.cpp(92,16): message : the missing variadic argument 1 is required by format string '%s'
+  SDL_Game.vcxproj -> D:\workspace\SDLproject\Demo_Game\SDL_Game\Debug\SDL_Game.exe
