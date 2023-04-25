@@ -12,6 +12,7 @@ GameWorld::GameWorld() {
     end_of_original_background_ = WINDOW_WIDTH;
     end_of_compensation_background_ = 0;
     background_offset_ = 0;
+    current_screen_ = 1;
 }
 
 GameWorld::~GameWorld() {
@@ -145,10 +146,37 @@ bool GameWorld::InitializeSamurai() {
     return isSuccess;
 }
 
+bool GameWorld::InitializeTheEnemies() {
+    //init archer skeleton
+    for (int i = 0; i < AR_SK_NUMBER; ++i) {
+        auto ar_sk = CharacterPool::Instance()->GetArcherSkeleton();
+        if (ar_sk == nullptr) return false;
+        ar_sk->SetXPos(ar_sk_occupied_list_[i].first);
+        ar_sk->SetYPos(ar_sk_occupied_list_[i].second);
+        ar_sk_enemies_.push_back(ar_sk);
+    }
+
+    //run all archer skeleton in the idle state
+    for (int i = 0; i < ar_sk_enemies_.size();++i) {
+        if (ar_sk_enemies_[i] != nullptr) {
+            ar_sk_enemies_[i]->Idle();
+        }
+    }
+    return true;
+}
+
+void GameWorld::EnemiesAnimationUpdate() {
+    for (int i = 0; i < ar_sk_enemies_.size(); ++i) {
+        if (ar_sk_enemies_[i] != nullptr) {
+            ar_sk_enemies_[i]->UpdateAnimation();
+        }
+    }
+}
+
 void GameWorld::RenderTheBackground() {
     //get the offset
     if (dynamic_cast<SamuraiWalkState*>(Samurai::Instance()->smr_state_machine_->current_state_)) {
-        background_offset_ = Samurai::Instance()->GetVelocityX();
+        background_offset_ = 1;
         if (Samurai::Instance()->GetIsFacingRight()) {
             original_background_rect_.x = original_background_rect_.x - background_offset_;
             compensation_background_rect_.x -= background_offset_;
@@ -196,22 +224,22 @@ void GameWorld::EventLoop() {
         SDL_RenderClear(sdl_renderer_);
 
         RenderTheBackground();
-        // SDL_RenderCopy(sdl_renderer_, background_texture_, nullptr, &original_background_rect_);
         Samurai::Instance()->UpdateAnimation();
+        EnemiesAnimationUpdate();
         SDL_RenderPresent(sdl_renderer_);
 
         //FPS calculator & capping the frame rate
         Uint32 real_time_frame = fps_timer.GetTicks();
-        printf("real time: %lu", (unsigned long)real_time_frame);
+        printf("real time: %lu \n", (unsigned long)real_time_frame);
         if (real_time_frame < time_per_frame) {
             Uint32 delay_time = time_per_frame - real_time_frame;
-            printf("delay time: %lu", (unsigned long)delay_time);
+            printf("delay time: %lu \n", (unsigned long)delay_time);
             if (delay_time >= 0) {
                 SDL_Delay(delay_time);
             }
         } else {
             Uint32 delay_time = real_time_frame - time_per_frame;
-            printf("delay time: %lu", (unsigned long)delay_time);
+            printf("delay time: %lu \n", (unsigned long)delay_time);
             if (delay_time >= 0) {
                 SDL_Delay(delay_time);
             }
@@ -224,6 +252,11 @@ void GameWorld::RunningTheGame() {
         printf(" %s () game world is initialized successfully\n", __FUNCSIG__);
         if (InitializeSamurai()) {
             printf(" %s () main character samurai is initialized successfully!\n", __FUNCSIG__);
+            if (InitializeTheEnemies()) {
+                printf(" %s () enemies initialized successfully!\n", __FUNCSIG__);
+            } else {
+                printf(" %s () enemies initialized failed!\n", __FUNCSIG__);
+            }
         }
         else {
             printf(" %s () main character samurai can't be initialized!\n", __FUNCSIG__);

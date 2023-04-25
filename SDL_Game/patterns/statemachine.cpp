@@ -46,3 +46,37 @@ bool SamuraiStateMachine::SetState(BaseState* _state) {
 void SamuraiStateMachine::StateAnimationDone() {
     SetState(smr_idle_state_);
 }
+
+/*****************Skeleton State Machine******************/
+
+SkeletonStateMachine::SkeletonStateMachine() {
+    current_state_ = nullptr;
+    ar_sk_idle_state_ = new ArcherSkeletonIdleState();
+    current_state_ = ar_sk_idle_state_;
+}
+
+SkeletonStateMachine::~SkeletonStateMachine() {
+    if (current_state_ != nullptr) {
+        delete current_state_;
+        current_state_ = nullptr;
+    }
+    if (ar_sk_idle_state_ != nullptr) {
+        delete ar_sk_idle_state_;
+        ar_sk_idle_state_ = nullptr;
+    }
+}
+
+bool SkeletonStateMachine::SetState(BaseState* _state) {
+    if (_state == nullptr) return false;
+
+    _state->Exit();
+    current_state_ = _state;
+    _state->Enter();
+    return true;
+}
+void SkeletonStateMachine::StateAnimationDone() {
+    SetState(ar_sk_idle_state_);
+}
+
+
+/*****************Skeleton State Machine******************/

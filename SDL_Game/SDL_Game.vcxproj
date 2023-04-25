@@ -146,13 +146,24 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="character\ArcherSkeleton.cpp" />
     <ClCompile Include="character\samurai.cpp" />
     <ClCompile Include="Common\commonobject.cpp" />
     <ClCompile Include="Common\keyboardcontroller.cpp" />
     <ClCompile Include="Common\SDL_timer.cpp" />
     <ClCompile Include="GameWorld\gameworld.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="patterns\archerskeletondefendstate.cpp" />
+    <ClCompile Include="patterns\archerskeletondiestate.cpp" />
+    <ClCompile Include="patterns\archerskeletonhurtstate.cpp" />
+    <ClCompile Include="patterns\archerskeletonidlestate.cpp" />
+    <ClCompile Include="patterns\archerskeletonnormalattackstate.cpp" />
+    <ClCompile Include="patterns\archerskeletonnormalshotstate.cpp" />
+    <ClCompile Include="patterns\archerskeletonspecialattackstate.cpp" />
+    <ClCompile Include="patterns\archerskeletonstrongattackstate.cpp" />
+    <ClCompile Include="patterns\archerskeletonwalkstate.cpp" />
     <ClCompile Include="patterns\basestate.cpp" />
+    <ClCompile Include="patterns\gameobjectpool.cpp" />
     <ClCompile Include="patterns\samuraidefendstate.cpp" />
     <ClCompile Include="patterns\samuraiidlestate.cpp" />
     <ClCompile Include="patterns\samurainormalattackstate.cpp" />
@@ -162,13 +173,24 @@
     <ClCompile Include="patterns\statemachine.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="character\ArcherSkeleton.h" />
     <ClInclude Include="character\character.h" />
     <ClInclude Include="character\samurai.h" />
     <ClInclude Include="Common\commonobject.h" />
     <ClInclude Include="Common\keyboardcontroller.h" />
     <ClInclude Include="Common\SDL_timer.h" />
     <ClInclude Include="GameWorld\gameworld.h" />
+    <ClInclude Include="patterns\archerskeletondefendstate.h" />
+    <ClInclude Include="patterns\archerskeletondiestate.h" />
+    <ClInclude Include="patterns\archerskeletonhurtstate.h" />
+    <ClInclude Include="patterns\archerskeletonidlestate.h" />
+    <ClInclude Include="patterns\archerskeletonnormalattackstate.h" />
+    <ClInclude Include="patterns\archerskeletonnormalshotstate.h" />
+    <ClInclude Include="patterns\archerskeletonspecialattackstate.h" />
+    <ClInclude Include="patterns\archerskeletonstrongattackstate.h" />
+    <ClInclude Include="patterns\archerskeletonwalkstate.h" />
     <ClInclude Include="patterns\baseState.h" />
+    <ClInclude Include="patterns\gameobjectpool.h" />
     <ClInclude Include="Patterns\Observable.h" />
     <ClInclude Include="Patterns\Observer.h" />
     <ClInclude Include="patterns\samuraidefendstate.h" />

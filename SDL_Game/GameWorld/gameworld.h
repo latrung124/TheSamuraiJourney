@@ -4,6 +4,7 @@
 #include "Common/SDL_timer.h"
 #include "character/samurai.h"
 #include "Common/keyboardcontroller.h"
+#include "gameobjectpool.h"
 class GameWorld {
 
 public:
@@ -18,13 +19,18 @@ public:
     void CleanUp();
 
     bool InitializeSamurai();
+    bool InitializeTheEnemies();
     void EventLoop();
     void RenderTheBackground();
+    void EnemiesAnimationUpdate();
 
     void RunningTheGame();
     SDL_Renderer* GetRenderer();
 
     SDL_Renderer* sdl_renderer_;
+
+    std::vector<std::shared_ptr<ArcherSkeleton>> ar_sk_enemies_;
+    std::vector<std::pair<int, int>> ar_sk_occupied_list_ = {{300, 600}};
 private:
     SDL_Window* sdl_window_;
     SDL_Texture* background_texture_;
@@ -36,4 +42,5 @@ private:
     int16_t start_of_compensation_background_;
     int16_t end_of_compensation_background_;
     int16_t background_offset_;
+    int16_t current_screen_;
 };

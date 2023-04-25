@@ -29,12 +29,14 @@ void KeyboardController::HandleKeyDownEvent(SDL_Keycode _event_type) {
     case SDLK_LEFT: {
         printf("%s key event:%d \n", __FUNCSIG__, (int)_event_type);
         Samurai::Instance()->SetIsFacingRight(false);
+
         Samurai::Instance()->Walk();
         break;
     }
     case SDLK_RIGHT: {
         printf("%s key event:%d \n", __FUNCSIG__, (int)_event_type);
         Samurai::Instance()->SetIsFacingRight(true);
+
         Samurai::Instance()->Walk();
         break;
     }

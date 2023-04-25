@@ -10,6 +10,22 @@
 #define SAMURAI_NORMAL_ATTACK_PATH "..\\asset\\character\\samurai\\Attack_1.png"
 #define SAMURAI_STRONG_ATTACK_PATH "..\\asset\\character\\samurai\\Attack_2.png"
 #define SAMURAI_SPECIAL_ATTACK_PATH "..\\asset\\character\\samurai\\Attack_3.png"
+
+//skeleton sprites path
+#define ARCHER_SKELETON_IDLE_PATH "..\\asset\\character\\archer_skeleton\\Idle.png"
+#define ARCHER_SKELETON_NORMAL_ATTACK_PATH "..\\asset\\character\\archer_skeleton\\Attack_1.png"
+#define ARCHER_SKELETON_SPECIAL_ATTACK_PATH "..\\asset\\character\\archer_skeleton\\Attack_2.png"
+#define ARCHER_SKELETON_STRONG_PATH "..\\asset\\character\\archer_skeleton\\Attack_3.png"
+#define ARCHER_SKELETON_DEAD_PATH "..\\asset\\character\\archer_skeleton\\Dead.png"
+#define ARCHER_SKELETON_WALK_PATH "..\\asset\\character\\archer_skeleton\\Walk.png"
+#define ARCHER_SKELETON_NORMAL_SHOT_PATH "..\\asset\\character\\archer_skeleton\\Shot_1.png"
+#define ARCHER_SKELETON_SPECIAL_SHOT_PATH "..\\asset\\character\\archer_skeleton\\Shot_2.png"
+
+//enemies statistics
+#define AR_SK_NUMBER 1
+
+//game visualization
+#define MAX_SCREEN_OF_FIRST_SCENE 5
 #define GAME_MOVING_OFFSET 2
 #define WINDOW_WIDTH 928
 #define WINDOW_HEIGHT 793

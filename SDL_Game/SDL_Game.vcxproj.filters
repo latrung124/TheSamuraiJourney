@@ -57,6 +57,39 @@
     <ClCompile Include="patterns\samuraiwalkstate.cpp">
       <Filter>Header Files</Filter>
     </ClCompile>
+    <ClCompile Include="character\ArcherSkeleton.cpp">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="patterns\archerskeletonidlestate.cpp">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="patterns\archerskeletonnormalattackstate.cpp">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="patterns\archerskeletonstrongattackstate.cpp">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="patterns\archerskeletonspecialattackstate.cpp">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="patterns\archerskeletonwalkstate.cpp">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="patterns\archerskeletonhurtstate.cpp">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="patterns\archerskeletondefendstate.cpp">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="patterns\archerskeletondiestate.cpp">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="patterns\archerskeletonnormalshotstate.cpp">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="patterns\gameobjectpool.cpp">
+      <Filter>Header Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Common\commonobject.h">
@@ -105,6 +138,39 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="patterns\samuraiwalkstate.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="character\ArcherSkeleton.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="patterns\archerskeletonidlestate.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="patterns\archerskeletonnormalattackstate.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="patterns\archerskeletonstrongattackstate.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="patterns\archerskeletonspecialattackstate.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="patterns\archerskeletonwalkstate.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="patterns\archerskeletonhurtstate.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="patterns\archerskeletondefendstate.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="patterns\archerskeletondiestate.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="patterns\archerskeletonnormalshotstate.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="patterns\gameobjectpool.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

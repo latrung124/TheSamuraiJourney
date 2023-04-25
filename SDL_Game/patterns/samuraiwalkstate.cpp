@@ -49,7 +49,6 @@ void SamuraiWalkState::Enter() {
     SDL_Rect current_frame_rect = smr_sprites_rect_[current_frame_];
     is_facing_right = Samurai::Instance()->GetIsFacingRight();
 
-    Samurai::Instance()->XPositionChanged();
     //cause the samurai walk sprites has a different about 20 px in the positive x position
     // so need to calculate the x, y pos of the samurai when he walks
     int current_x_pos = Samurai::Instance()->GetXPos();
@@ -74,7 +73,6 @@ void SamuraiWalkState::Update() {
         return;
     }
     SDL_Rect current_frame_rect = smr_sprites_rect_[current_frame_/WALK_FRAME_NUMBER];
-    Samurai::Instance()->XPositionChanged();
     printf("%s samurai x_pos : %d, y_pos: %d", __FUNCSIG__, Samurai::Instance()->GetXPos(), Samurai::Instance()->GetYPos());
     //cause the samurai walk sprites has a different about 20 px in the positive x position
     //so need to calculate the x, y pos of the samurai when he walks
@@ -92,6 +90,7 @@ void SamuraiWalkState::Update() {
     ++current_frame_;
     if (current_frame_/WALK_FRAME_NUMBER >= WALK_FRAME_NUMBER) {
         current_frame_ = 0;
+        Samurai::Instance()->XPositionChanged();
     }
 }
 
