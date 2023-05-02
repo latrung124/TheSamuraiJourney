@@ -3,6 +3,8 @@
 ArcherSkeletonIdleState::ArcherSkeletonIdleState() {
     ar_sk_idle_sprites_ = nullptr;
     is_mode_on_ = false;
+    spawn_y_ = SPAWN_Y;
+    acceleration_spawnn_down_ = SPAWN_DOWN_OFFSET;
     if (!InitializeState()) {
         printf("%s init idle state failed!\n", __FUNCSIG__);
     }
@@ -41,16 +43,15 @@ void ArcherSkeletonIdleState::Enter() {
         return;
     }
     SDL_Rect current_frame_rect = ar_sk_sprites_rect_[current_frame_];
-    is_facing_right = Samurai::Instance()->GetIsFacingRight();
-    if (!is_facing_right) {
-        int current_x_pos = 300;
+    if (!is_facing_right_) {
+        int current_x_pos = x_pos_;
         current_x_pos -= (current_x_pos + game_define::kCharacterSize >= AR_SK_DIFF_IDLE_SPRITES) ? AR_SK_DIFF_IDLE_SPRITES : 0;
-        destination_rect_ = { current_x_pos, 600, game_define::kCharacterSize, game_define::kCharacterSize };
+        destination_rect_ = { current_x_pos, spawn_y_, game_define::kCharacterSize, game_define::kCharacterSize };
         SDL_RenderCopyEx(GameWorld::Instance()->GetRenderer(), ar_sk_idle_sprites_, &current_frame_rect, &destination_rect_, 0, NULL, SDL_FLIP_HORIZONTAL);
         return;
     }
 
-    destination_rect_ = { 300, 600, game_define::kCharacterSize, game_define::kCharacterSize };
+    destination_rect_ = { x_pos_, spawn_y_, game_define::kCharacterSize, game_define::kCharacterSize };
     SDL_RenderCopy(GameWorld::Instance()->GetRenderer(), ar_sk_idle_sprites_, &current_frame_rect, &destination_rect_);
     // SDL_RenderPresent(GameWorld::Instance()->GetRenderer());
 }
@@ -60,21 +61,24 @@ void ArcherSkeletonIdleState::Update() {
         printf("%s texture nullptr", __FUNCSIG__);
         return;
     }
-    //destroy last texture
-    // std::string ar_sk_idle_image_path = SAMURAI_IDLE_PATH;
-    // ar_sk_idle_sprites_ = CommonObject::Instance()->ImageTexture(ar_sk_idle_image_path, GameWorld::Instance()->GetRenderer());
     if (ar_sk_idle_sprites_ == nullptr) {
         printf("%s () Failed to load the idle texture, SDL_Error(): %s", __FUNCSIG__, SDL_GetError());
         return;
     }
     SDL_Rect current_frame_rect = ar_sk_sprites_rect_[current_frame_/AR_SK_IDLE_FRAME_NUMBER];
-    if (!is_facing_right) {
-        int current_x_pos = 300;
+    if (!is_facing_right_) {
+        int current_x_pos = x_pos_;
+        if (spawn_y_ < y_pos_) {
+            acceleration_spawnn_down_ += SPAWN_DOWN_OFFSET;
+            spawn_y_ += acceleration_spawnn_down_;
+        } else {
+            spawn_y_ = y_pos_;
+        }
         current_x_pos -= (current_x_pos + game_define::kCharacterSize >= AR_SK_DIFF_IDLE_SPRITES) ? AR_SK_DIFF_IDLE_SPRITES : 0;
-        destination_rect_ = { current_x_pos, 600, game_define::kCharacterSize, game_define::kCharacterSize };
+        destination_rect_ = { current_x_pos, spawn_y_, game_define::kCharacterSize, game_define::kCharacterSize };
         SDL_RenderCopyEx(GameWorld::Instance()->GetRenderer(), ar_sk_idle_sprites_, &current_frame_rect, &destination_rect_, 0, NULL, SDL_FLIP_HORIZONTAL);
     } else {
-        destination_rect_ = { 300, 600, game_define::kCharacterSize, game_define::kCharacterSize };
+        destination_rect_ = { x_pos_, y_pos_, game_define::kCharacterSize, game_define::kCharacterSize };
         SDL_RenderCopy(GameWorld::Instance()->GetRenderer(), ar_sk_idle_sprites_, &current_frame_rect, &destination_rect_);
     } 
     printf("%s frame %d was loaded!\n", __FUNCSIG__, current_frame_);

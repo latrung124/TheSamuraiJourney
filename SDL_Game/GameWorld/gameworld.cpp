@@ -148,12 +148,12 @@ bool GameWorld::InitializeSamurai() {
 
 bool GameWorld::InitializeTheEnemies() {
     //init archer skeleton
+    printf("%s \n", __FUNCSIG__);
     for (int i = 0; i < AR_SK_NUMBER; ++i) {
         auto ar_sk = CharacterPool::Instance()->GetArcherSkeleton();
         if (ar_sk == nullptr) return false;
-        ar_sk->SetXPos(ar_sk_occupied_list_[i].first);
-        ar_sk->SetYPos(ar_sk_occupied_list_[i].second);
         ar_sk_enemies_.push_back(ar_sk);
+
     }
 
     //run all archer skeleton in the idle state
@@ -168,7 +168,7 @@ bool GameWorld::InitializeTheEnemies() {
 void GameWorld::EnemiesAnimationUpdate() {
     for (int i = 0; i < ar_sk_enemies_.size(); ++i) {
         if (ar_sk_enemies_[i] != nullptr) {
-            ar_sk_enemies_[i]->UpdateAnimation();
+            ar_sk_enemies_[i]->GetStateMachine()->StateAnimationUpdate(ar_sk_enemies_[i]);
         }
     }
 }
@@ -176,22 +176,28 @@ void GameWorld::EnemiesAnimationUpdate() {
 void GameWorld::RenderTheBackground() {
     //get the offset
     if (dynamic_cast<SamuraiWalkState*>(Samurai::Instance()->smr_state_machine_->current_state_)) {
-        background_offset_ = 1;
+        background_offset_ = GAME_MOVING_OFFSET;
         if (Samurai::Instance()->GetIsFacingRight()) {
-            original_background_rect_.x = original_background_rect_.x - background_offset_;
-            compensation_background_rect_.x -= background_offset_;
-            if (original_background_rect_.x == (-1) * WINDOW_WIDTH) {
-                //reset the position of the background after it met the end
-                original_background_rect_.x = 0;
-                compensation_background_rect_.x = WINDOW_WIDTH;
+            if (GameMechanismController::Instance()->GetRealXPosOfMap() < MAP_WIDTH) {
+                GameMechanismController::Instance()->IncreaseRealXPosOfMap(background_offset_);
+                original_background_rect_.x = original_background_rect_.x - background_offset_;
+                compensation_background_rect_.x -= background_offset_;
+                if (original_background_rect_.x == (-1) * WINDOW_WIDTH) {
+                    // reset the position of the background after it met the end
+                    original_background_rect_.x = 0;
+                    compensation_background_rect_.x = WINDOW_WIDTH;
+                }
             }
         } else {
-            if (original_background_rect_.x == 0) {
-                original_background_rect_.x -= WINDOW_WIDTH;
-                compensation_background_rect_.x = 0;
+            if (GameMechanismController::Instance()->GetRealXPosOfMap() > 0) {
+                GameMechanismController::Instance()->DecreaseRealXPosOfMap(background_offset_);
+                if (original_background_rect_.x == 0) {
+                    original_background_rect_.x -= WINDOW_WIDTH;
+                    compensation_background_rect_.x = 0;
+                }
+                original_background_rect_.x += background_offset_;
+                compensation_background_rect_.x += background_offset_;
             }
-            original_background_rect_.x += background_offset_;
-            compensation_background_rect_.x += background_offset_;
         }
 
     } else background_offset_ = 0;

@@ -41,8 +41,8 @@ void SamuraiIdleState::Enter() {
         return;
     }
     SDL_Rect current_frame_rect = smr_sprites_rect_[current_frame_];
-    is_facing_right = Samurai::Instance()->GetIsFacingRight();
-    if (!is_facing_right) {
+    is_facing_right_ = Samurai::Instance()->GetIsFacingRight();
+    if (!is_facing_right_) {
         int current_x_pos = Samurai::Instance()->GetXPos();
         current_x_pos -= (current_x_pos + game_define::kCharacterSize >= DIFF_IDLE_SPRITES) ? DIFF_IDLE_SPRITES : 0;
         destination_rect_ = { current_x_pos, Samurai::Instance()->GetYPos(), game_define::kCharacterSize, game_define::kCharacterSize };
@@ -68,7 +68,7 @@ void SamuraiIdleState::Update() {
         return;
     }
     SDL_Rect current_frame_rect = smr_sprites_rect_[current_frame_/IDLE_FRAME_NUMBER];
-    if (!is_facing_right) {
+    if (!is_facing_right_) {
         int current_x_pos = Samurai::Instance()->GetXPos();
         current_x_pos -= (current_x_pos + game_define::kCharacterSize >= DIFF_IDLE_SPRITES) ? DIFF_IDLE_SPRITES : 0;
         destination_rect_ = { current_x_pos, Samurai::Instance()->GetYPos(), game_define::kCharacterSize, game_define::kCharacterSize };

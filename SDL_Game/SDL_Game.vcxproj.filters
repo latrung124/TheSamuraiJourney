@@ -90,6 +90,9 @@
     <ClCompile Include="patterns\gameobjectpool.cpp">
       <Filter>Header Files</Filter>
     </ClCompile>
+    <ClCompile Include="Controller\gamemechanismcontroller.cpp">
+      <Filter>Header Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Common\commonobject.h">
@@ -171,6 +174,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="patterns\gameobjectpool.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Controller\gamemechanismcontroller.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -22,12 +22,15 @@
 #define ARCHER_SKELETON_SPECIAL_SHOT_PATH "..\\asset\\character\\archer_skeleton\\Shot_2.png"
 
 //enemies statistics
-#define AR_SK_NUMBER 1
+#define AR_SK_NUMBER 3
+#define SPAWN_Y 0
+#define SPAWN_DOWN_OFFSET 1
 
 //game visualization
 #define MAX_SCREEN_OF_FIRST_SCENE 5
-#define GAME_MOVING_OFFSET 2
+#define GAME_MOVING_OFFSET 1
 #define WINDOW_WIDTH 928
+#define MAP_WIDTH WINDOW_WIDTH*5
 #define WINDOW_HEIGHT 793
 #define ANIMATION_SPEED 100 //100 milliseconds
 #define FPS 60

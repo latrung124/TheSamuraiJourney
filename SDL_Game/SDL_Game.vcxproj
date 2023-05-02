@@ -151,6 +151,7 @@
     <ClCompile Include="Common\commonobject.cpp" />
     <ClCompile Include="Common\keyboardcontroller.cpp" />
     <ClCompile Include="Common\SDL_timer.cpp" />
+    <ClCompile Include="Controller\gamemechanismcontroller.cpp" />
     <ClCompile Include="GameWorld\gameworld.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="patterns\archerskeletondefendstate.cpp" />
@@ -179,6 +180,7 @@
     <ClInclude Include="Common\commonobject.h" />
     <ClInclude Include="Common\keyboardcontroller.h" />
     <ClInclude Include="Common\SDL_timer.h" />
+    <ClInclude Include="Controller\gamemechanismcontroller.h" />
     <ClInclude Include="GameWorld\gameworld.h" />
     <ClInclude Include="patterns\archerskeletondefendstate.h" />
     <ClInclude Include="patterns\archerskeletondiestate.h" />

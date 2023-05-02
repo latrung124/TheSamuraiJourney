@@ -5,6 +5,7 @@
 class ArcherSkeleton : public Character {
 public:
     ArcherSkeleton();
+    ArcherSkeleton(int _x_pos, int _y_pos);
     ~ArcherSkeleton();
 
     virtual void NormalAttack() override;
@@ -19,8 +20,6 @@ public:
     virtual void Jump() override;
 
     void NormalShot();
-
-    void UpdateAnimation();
 
     int GetXPos();
     int GetYPos();

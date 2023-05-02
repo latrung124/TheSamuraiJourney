@@ -18,4 +18,6 @@ private:
     SDL_Rect destination_rect_;
     unsigned int current_frame_;
     bool is_mode_on_;
+    int acceleration_spawnn_down_;
+    int spawn_y_;
 };

@@ -3,7 +3,7 @@
 SamuraiWalkState::SamuraiWalkState() {
     smr_walk_sprites_ = nullptr;
     is_mode_on_ = false;
-    is_facing_right = true;
+    is_facing_right_ = true;
     if (!InitializeState()) {
         printf("%s init walk state failed!\n", __FUNCSIG__);
     }
@@ -47,13 +47,13 @@ void SamuraiWalkState::Enter() {
         return;
     }
     SDL_Rect current_frame_rect = smr_sprites_rect_[current_frame_];
-    is_facing_right = Samurai::Instance()->GetIsFacingRight();
+    is_facing_right_ = Samurai::Instance()->GetIsFacingRight();
 
     //cause the samurai walk sprites has a different about 20 px in the positive x position
     // so need to calculate the x, y pos of the samurai when he walks
     int current_x_pos = Samurai::Instance()->GetXPos();
     current_x_pos -= (current_x_pos + game_define::kCharacterSize >= DIFF_WALK_SPRITES) ? DIFF_WALK_SPRITES : 0;
-    if (!is_facing_right) {
+    if (!is_facing_right_) {
         destination_rect_ = { current_x_pos, Samurai::Instance()->GetYPos(), game_define::kCharacterSize, game_define::kCharacterSize };
         SDL_RenderCopyEx(GameWorld::Instance()->GetRenderer(), smr_walk_sprites_, &current_frame_rect, &destination_rect_, 0, NULL, SDL_FLIP_HORIZONTAL);
         return;
@@ -78,7 +78,7 @@ void SamuraiWalkState::Update() {
     //so need to calculate the x, y pos of the samurai when he walks
     int current_x_pos = Samurai::Instance()->GetXPos();
     current_x_pos -= (current_x_pos + game_define::kCharacterSize >= DIFF_WALK_SPRITES) ? DIFF_WALK_SPRITES : 0;
-    if (!is_facing_right) {
+    if (!is_facing_right_) {
         destination_rect_ = { current_x_pos, Samurai::Instance()->GetYPos(), game_define::kCharacterSize, game_define::kCharacterSize };
         SDL_RenderCopyEx(GameWorld::Instance()->GetRenderer(), smr_walk_sprites_, &current_frame_rect, &destination_rect_, 0, NULL, SDL_FLIP_HORIZONTAL);
     } else {

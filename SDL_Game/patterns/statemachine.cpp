@@ -1,4 +1,5 @@
 #include "statemachine.h"
+#include "character/ArcherSkeleton.h"
 SamuraiStateMachine::SamuraiStateMachine() {
     current_state_ = nullptr;
     smr_idle_state_ = new SamuraiIdleState();
@@ -49,10 +50,13 @@ void SamuraiStateMachine::StateAnimationDone() {
 
 /*****************Skeleton State Machine******************/
 
-SkeletonStateMachine::SkeletonStateMachine() {
+SkeletonStateMachine::SkeletonStateMachine(ArcherSkeleton* _ar_sk) {
     current_state_ = nullptr;
     ar_sk_idle_state_ = new ArcherSkeletonIdleState();
     current_state_ = ar_sk_idle_state_;
+    current_state_->x_pos_ = _ar_sk->GetXPos();
+    current_state_->y_pos_ = _ar_sk->GetYPos();
+    current_state_->is_facing_right_ = _ar_sk->GetIsFacingRight();
 }
 
 SkeletonStateMachine::~SkeletonStateMachine() {
@@ -74,6 +78,16 @@ bool SkeletonStateMachine::SetState(BaseState* _state) {
     _state->Enter();
     return true;
 }
+
+void SkeletonStateMachine::StateAnimationUpdate(std::shared_ptr<ArcherSkeleton>& _ar_sk) {
+    if (current_state_ != nullptr) {
+        current_state_->x_pos_ = _ar_sk->GetXPos();
+        current_state_->y_pos_ = _ar_sk->GetYPos();
+        current_state_->is_facing_right_ = _ar_sk->GetIsFacingRight();
+        current_state_->Update();
+    }
+}
+
 void SkeletonStateMachine::StateAnimationDone() {
     SetState(ar_sk_idle_state_);
 }

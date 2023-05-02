@@ -6,7 +6,16 @@ ArcherSkeleton::ArcherSkeleton() {
     ar_sk_velocity_x_ = 0;
     ar_sk_velocity_y_ = 0;
     is_facing_right_ = false;
-    sk_state_machine_ = new SkeletonStateMachine();
+    sk_state_machine_ = new SkeletonStateMachine(this);
+}
+
+ArcherSkeleton::ArcherSkeleton(int _x_pos, int _y_pos) {
+    x_pos_ = _x_pos;
+    y_pos_ = _y_pos;
+    ar_sk_velocity_x_ = 0;
+    ar_sk_velocity_y_ = 0;
+    is_facing_right_ = false;
+    sk_state_machine_ = new SkeletonStateMachine(this);
 }
 
 ArcherSkeleton::~ArcherSkeleton() {
@@ -62,12 +71,6 @@ void ArcherSkeleton::SetIsFacingRight(bool _is_facing_right) {
 void ArcherSkeleton::XPositionChanged() {
     SetXPos(ar_sk_velocity_x_);
     printf("%s x_pos: %d \n", __FUNCSIG__, x_pos_);
-}
-
-
-void ArcherSkeleton::UpdateAnimation() {
-    if (sk_state_machine_->current_state_ != nullptr)
-    sk_state_machine_->current_state_->Update();
 }
 
 void ArcherSkeleton::NormalAttack() {

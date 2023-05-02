@@ -5,6 +5,7 @@
 #include "character/samurai.h"
 #include "Common/keyboardcontroller.h"
 #include "gameobjectpool.h"
+#include "Controller/gamemechanismcontroller.h"
 class GameWorld {
 
 public:
@@ -30,7 +31,6 @@ public:
     SDL_Renderer* sdl_renderer_;
 
     std::vector<std::shared_ptr<ArcherSkeleton>> ar_sk_enemies_;
-    std::vector<std::pair<int, int>> ar_sk_occupied_list_ = {{300, 600}};
 private:
     SDL_Window* sdl_window_;
     SDL_Texture* background_texture_;

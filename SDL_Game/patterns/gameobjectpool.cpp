@@ -3,6 +3,8 @@
 static CharacterPool* character_pool_ = nullptr;
 CharacterPool::CharacterPool() {
     ar_sk_pool_size_ = AR_SK_NUMBER;
+    InitializeArcherSkeletonSpawnPosition();
+    InitializeArcherSkeletonPool();
 }
 
 CharacterPool::~CharacterPool() {
@@ -12,8 +14,21 @@ CharacterPool::~CharacterPool() {
     }
 }
 
+void CharacterPool::InitializeArcherSkeletonSpawnPosition() {
+    printf("%s \n", __FUNCSIG__);
+    ar_sk_spawn_pos_vector_.push_back({300, 600});
+    ar_sk_spawn_pos_vector_.push_back({600, 600});
+    ar_sk_spawn_pos_vector_.push_back({900, 600});
+}
+
+
 void CharacterPool::InitializeArcherSkeletonPool() {
-    // ar_sk_pool_.push_back(std::make_shared<ArcherSkeleton>());
+    printf("%s \n", __FUNCSIG__);
+    for (int i = 0; i < AR_SK_NUMBER; ++i) {
+        std::shared_ptr<ArcherSkeleton> ptr(new ArcherSkeleton(ar_sk_spawn_pos_vector_[i].first, ar_sk_spawn_pos_vector_[i].second));
+        ar_sk_pool_.push_back(ptr);
+    }
+    printf("%s successfully\n", __FUNCSIG__);
 }
 
 CharacterPool* CharacterPool::Instance() {
@@ -29,8 +44,7 @@ std::shared_ptr<ArcherSkeleton> CharacterPool::GetArcherSkeleton() {
     } else {
         auto ar_sk = ar_sk_pool_.back();
         ar_sk_pool_.pop_back();
-        ar_sk->GetStateMachine()->StateAnimationDone();
-
+        // ar_sk->GetStateMachine()->StateAnimationDone();
         return ar_sk;
     }
 }

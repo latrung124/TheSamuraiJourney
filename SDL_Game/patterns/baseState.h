@@ -8,5 +8,7 @@ public:
     virtual void Enter() = 0;
     virtual void Update() = 0;
     virtual void Exit() = 0;
-    bool is_facing_right;
+    bool is_facing_right_;
+    int x_pos_ = 0;
+    int y_pos_ = 0;
 };

@@ -40,13 +40,15 @@ public:
     SamuraiWalkState* smr_walk_state_;
 };
 
+class ArcherSkeleton;
 class SkeletonStateMachine : public StateMachine{
 public:
-    SkeletonStateMachine();
+    SkeletonStateMachine(ArcherSkeleton* _ar_sk);
     ~SkeletonStateMachine();
 
     virtual bool SetState(BaseState* _state) override;
     virtual void StateAnimationDone() override;
+    void StateAnimationUpdate(std::shared_ptr<ArcherSkeleton>& _ar_sk);
 
     ArcherSkeletonIdleState* ar_sk_idle_state_;
 };

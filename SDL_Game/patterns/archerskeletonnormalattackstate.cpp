@@ -41,16 +41,15 @@ void ArcherSkeletonNormalAttackState::Enter() {
         return;
     }
     SDL_Rect current_frame_rect = ar_sk_sprites_rect_[current_frame_];
-    is_facing_right = Samurai::Instance()->GetIsFacingRight();
-    if (!is_facing_right) {
-        int current_x_pos = 300;
+    if (!is_facing_right_) {
+        int current_x_pos = x_pos_;
         current_x_pos -= (current_x_pos + game_define::kCharacterSize >= AR_SK_DIFF_NORMAL_ATTACK_SPRITES) ? AR_SK_DIFF_NORMAL_ATTACK_SPRITES : 0;
-        destination_rect_ = { current_x_pos, 600, game_define::kCharacterSize, game_define::kCharacterSize };
+        destination_rect_ = { current_x_pos, y_pos_, game_define::kCharacterSize, game_define::kCharacterSize };
         SDL_RenderCopyEx(GameWorld::Instance()->GetRenderer(), ar_sk_normal_attack_sprites_, &current_frame_rect, &destination_rect_, 0, NULL, SDL_FLIP_HORIZONTAL);
         return;
     }
 
-    destination_rect_ = { 300, 600, game_define::kCharacterSize, game_define::kCharacterSize };
+    destination_rect_ = { x_pos_, y_pos_, game_define::kCharacterSize, game_define::kCharacterSize };
     SDL_RenderCopy(GameWorld::Instance()->GetRenderer(), ar_sk_normal_attack_sprites_, &current_frame_rect, &destination_rect_);
     // SDL_RenderPresent(GameWorld::Instance()->GetRenderer());
 }
@@ -68,13 +67,13 @@ void ArcherSkeletonNormalAttackState::Update() {
         return;
     }
     SDL_Rect current_frame_rect = ar_sk_sprites_rect_[current_frame_/AR_SK_NORMAL_ATTACK_FRAME_NUMBER];
-    if (!is_facing_right) {
-        int current_x_pos = 300;
+    if (!is_facing_right_) {
+        int current_x_pos = x_pos_;
         current_x_pos -= (current_x_pos + game_define::kCharacterSize >= AR_SK_DIFF_NORMAL_ATTACK_SPRITES) ? AR_SK_DIFF_NORMAL_ATTACK_SPRITES : 0;
-        destination_rect_ = { current_x_pos, 600, game_define::kCharacterSize, game_define::kCharacterSize };
+        destination_rect_ = { current_x_pos, y_pos_, game_define::kCharacterSize, game_define::kCharacterSize };
         SDL_RenderCopyEx(GameWorld::Instance()->GetRenderer(), ar_sk_normal_attack_sprites_, &current_frame_rect, &destination_rect_, 0, NULL, SDL_FLIP_HORIZONTAL);
     } else {
-        destination_rect_ = { 300, 600, game_define::kCharacterSize, game_define::kCharacterSize };
+        destination_rect_ = { x_pos_, y_pos_, game_define::kCharacterSize, game_define::kCharacterSize };
         SDL_RenderCopy(GameWorld::Instance()->GetRenderer(), ar_sk_normal_attack_sprites_, &current_frame_rect, &destination_rect_);
     } 
     printf("%s frame %d was loaded!\n", __FUNCSIG__, current_frame_);
