@@ -1,12 +1,12 @@
 #include "ArcherSkeleton.h"
-
+#include "archerskeletonstatemachine.h"
 ArcherSkeleton::ArcherSkeleton() {
     x_pos_ = 300;
     y_pos_ = 600;
     ar_sk_velocity_x_ = 0;
     ar_sk_velocity_y_ = 0;
     is_facing_right_ = false;
-    sk_state_machine_ = new SkeletonStateMachine(this);
+    sk_state_machine_ = new SkeletonStateMachine();
 }
 
 ArcherSkeleton::ArcherSkeleton(int _x_pos, int _y_pos) {
@@ -15,7 +15,7 @@ ArcherSkeleton::ArcherSkeleton(int _x_pos, int _y_pos) {
     ar_sk_velocity_x_ = 0;
     ar_sk_velocity_y_ = 0;
     is_facing_right_ = false;
-    sk_state_machine_ = new SkeletonStateMachine(this);
+    sk_state_machine_ = new SkeletonStateMachine();
 }
 
 ArcherSkeleton::~ArcherSkeleton() {
@@ -27,6 +27,13 @@ ArcherSkeleton::~ArcherSkeleton() {
 
 SkeletonStateMachine* ArcherSkeleton::GetStateMachine() {
     return sk_state_machine_;
+}
+
+
+void ArcherSkeleton::StateAnimationUpdate() {
+    if (sk_state_machine_ != nullptr) {
+        sk_state_machine_->StateAnimationUpdate(this);
+    }
 }
 
 int ArcherSkeleton::GetXPos() {
@@ -50,6 +57,11 @@ void ArcherSkeleton::SetXPos(int _smr_velocity_x) {
             x_pos_ -= _smr_velocity_x;
     }
 }
+
+void ArcherSkeleton::ChangedPosAfterMapChanged(int _x_pos) {
+    x_pos_ += _x_pos;
+}
+
 void ArcherSkeleton::SetYPos(int _smr_velocity_y) {
     y_pos_ += _smr_velocity_y;
 }
@@ -116,13 +128,8 @@ void ArcherSkeleton::Defend() {
 
 void ArcherSkeleton::Idle() {
     printf("ArcherSkeleton goes to the idle state! \n");
-    if (dynamic_cast<ArcherSkeletonIdleState*>(sk_state_machine_->current_state_)) {
-        if (sk_state_machine_->SetState(sk_state_machine_->current_state_)) {
-            printf("ArcherSkeleton changed to idle state! \n");
-        }
-        else {
-            printf("ArcherSkeleton can't change to idle state! \n");
-        }
+    if (sk_state_machine_ != nullptr) {
+        sk_state_machine_->SetState(sk_state_machine_->GetIdleState(), this);
     }
 }
 
@@ -149,7 +156,12 @@ void ArcherSkeleton::Walk() {
 }
 
 void ArcherSkeleton::Hurt() {
-
+    printf("ArcherSkeleton goes to the hurt state! \n");
+    if (sk_state_machine_ != nullptr) {
+        sk_state_machine_->SetState(sk_state_machine_->GetHurtState(), this);
+    } else {
+        printf("ArcherSkeleton can't go to the hurt state! \n");
+    }
 }
 
 void ArcherSkeleton::Die() {

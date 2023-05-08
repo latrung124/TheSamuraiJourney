@@ -16,9 +16,9 @@ CharacterPool::~CharacterPool() {
 
 void CharacterPool::InitializeArcherSkeletonSpawnPosition() {
     printf("%s \n", __FUNCSIG__);
-    ar_sk_spawn_pos_vector_.push_back({300, 600});
-    ar_sk_spawn_pos_vector_.push_back({600, 600});
-    ar_sk_spawn_pos_vector_.push_back({900, 600});
+    ar_sk_spawn_pos_vector_.push_back({300, 0});
+    ar_sk_spawn_pos_vector_.push_back({600, 0});
+    ar_sk_spawn_pos_vector_.push_back({900, 0});
 }
 
 

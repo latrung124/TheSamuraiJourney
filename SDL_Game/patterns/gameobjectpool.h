@@ -1,6 +1,7 @@
 #pragma once
 #include <vector>
 #include <memory>
+#include "Common/commonobject.h"
 #include "character/character.h"
 #include "character/ArcherSkeleton.h"
 

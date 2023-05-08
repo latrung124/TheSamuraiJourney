@@ -20,10 +20,11 @@
 #define ARCHER_SKELETON_WALK_PATH "..\\asset\\character\\archer_skeleton\\Walk.png"
 #define ARCHER_SKELETON_NORMAL_SHOT_PATH "..\\asset\\character\\archer_skeleton\\Shot_1.png"
 #define ARCHER_SKELETON_SPECIAL_SHOT_PATH "..\\asset\\character\\archer_skeleton\\Shot_2.png"
+#define ARCHER_SKELETON_HURT_PATH "..\\asset\\character\\archer_skeleton\\Hurt.png"
 
 //enemies statistics
 #define AR_SK_NUMBER 3
-#define SPAWN_Y 0
+#define LAND_Y 600
 #define SPAWN_DOWN_OFFSET 1
 
 //game visualization

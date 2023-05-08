@@ -1,7 +1,6 @@
 #pragma once
 #include "character.h"
-#include "statemachine.h"
-
+class SkeletonStateMachine;
 class ArcherSkeleton : public Character {
 public:
     ArcherSkeleton();
@@ -20,7 +19,9 @@ public:
     virtual void Jump() override;
 
     void NormalShot();
+    void StateAnimationUpdate();
 
+    void ChangedPosAfterMapChanged(int _x_pos);
     int GetXPos();
     int GetYPos();
     bool GetIsFacingRight();
@@ -30,6 +31,7 @@ public:
     int GetVelocityY();
     void SetIsFacingRight(bool _is_facing_right);
     void XPositionChanged();
+
     SkeletonStateMachine* GetStateMachine();
 
 public:

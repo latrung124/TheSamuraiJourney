@@ -153,7 +153,6 @@ bool GameWorld::InitializeTheEnemies() {
         auto ar_sk = CharacterPool::Instance()->GetArcherSkeleton();
         if (ar_sk == nullptr) return false;
         ar_sk_enemies_.push_back(ar_sk);
-
     }
 
     //run all archer skeleton in the idle state
@@ -168,7 +167,7 @@ bool GameWorld::InitializeTheEnemies() {
 void GameWorld::EnemiesAnimationUpdate() {
     for (int i = 0; i < ar_sk_enemies_.size(); ++i) {
         if (ar_sk_enemies_[i] != nullptr) {
-            ar_sk_enemies_[i]->GetStateMachine()->StateAnimationUpdate(ar_sk_enemies_[i]);
+            ar_sk_enemies_[i]->StateAnimationUpdate();
         }
     }
 }
@@ -176,6 +175,7 @@ void GameWorld::EnemiesAnimationUpdate() {
 void GameWorld::RenderTheBackground() {
     //get the offset
     if (dynamic_cast<SamuraiWalkState*>(Samurai::Instance()->smr_state_machine_->current_state_)) {
+        GameMechanismController::Instance()->SetIsMapMoving(true);
         background_offset_ = GAME_MOVING_OFFSET;
         if (Samurai::Instance()->GetIsFacingRight()) {
             if (GameMechanismController::Instance()->GetRealXPosOfMap() < MAP_WIDTH) {
@@ -200,7 +200,10 @@ void GameWorld::RenderTheBackground() {
             }
         }
 
-    } else background_offset_ = 0;
+    } else {
+        GameMechanismController::Instance()->SetIsMapMoving(false);
+        background_offset_ = 0;
+    }
 
     printf("original background x: %d, compensation background x: %d \n", original_background_rect_.x, compensation_background_rect_.x);
     //render the origin background and the compennsation background
@@ -231,6 +234,7 @@ void GameWorld::EventLoop() {
 
         RenderTheBackground();
         Samurai::Instance()->UpdateAnimation();
+        GameMechanismController::Instance()->UpdatePositionOfEnemies(ar_sk_enemies_);
         EnemiesAnimationUpdate();
         SDL_RenderPresent(sdl_renderer_);
 

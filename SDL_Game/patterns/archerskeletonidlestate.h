@@ -1,15 +1,15 @@
 #pragma once
-#include "baseState.h"
+#include "archerskeletonbasestate.h"
 #define AR_SK_IDLE_FRAME_NUMBER 7
 #define AR_SK_DIFF_IDLE_SPRITES 55
 class GameWorld;
-class ArcherSkeletonIdleState : public BaseState{
+class ArcherSkeletonIdleState : public ArcherSkeletonBaseState {
 public:
     ArcherSkeletonIdleState();
     virtual ~ArcherSkeletonIdleState() override;
-    virtual void Enter() override;
-    virtual void Update() override;
-    virtual void Exit() override;
+    virtual void Enter(ArcherSkeleton* _ar_sk) override;
+    virtual void Update(ArcherSkeleton* _ar_sk) override;
+    virtual void Exit(ArcherSkeleton* _ar_sk) override;
 
     bool InitializeState();
 private:
