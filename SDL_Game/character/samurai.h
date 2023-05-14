@@ -20,6 +20,10 @@ public:
     virtual void Die() override;
     virtual void Run() override;
     virtual void Jump() override;
+    virtual int GetTopPos() override;
+    virtual int GetBottomPos() override;
+    virtual int GetLeftPos() override;
+    virtual int GetRightPos() override;
 
     virtual void AddObserver(Observer* _observer) override;
     virtual void RemoveObserser(Observer* _observer);
@@ -37,6 +41,7 @@ public:
     void SetIsFacingRight(bool _is_facing_right);
     void XPositionChanged();
     void HandleXPosWhenItMovesOutTheMap(int& _current_x_pos);
+    SamuraiStateMachine* GetSamuraiStateMachine();
 
 public:
     SamuraiStateMachine* smr_state_machine_;

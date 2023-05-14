@@ -167,9 +167,22 @@ bool GameWorld::InitializeTheEnemies() {
 void GameWorld::EnemiesAnimationUpdate() {
     for (int i = 0; i < ar_sk_enemies_.size(); ++i) {
         if (ar_sk_enemies_[i] != nullptr) {
+            //check collision
+            printf("samurai x: %d, y: %d \n", Samurai::Instance()->GetXPos(), Samurai::Instance()->GetYPos());
+            printf("skeleton x: %d, y: %d \n", ar_sk_enemies_[i]->GetXPos(), ar_sk_enemies_[i]->GetYPos());
+            if (GameMechanismController::Instance()->ColisionCheck(Samurai::Instance(), ar_sk_enemies_[i])) {
+                printf("collision !!!\n");
+            } else {
+                printf("no collision !!!\n");
+            }
             ar_sk_enemies_[i]->StateAnimationUpdate();
         }
     }
+}
+
+
+void GameWorld::SamuraiAnimationUpdate() {
+    Samurai::Instance()->UpdateAnimation();
 }
 
 void GameWorld::RenderTheBackground() {
@@ -233,7 +246,7 @@ void GameWorld::EventLoop() {
         SDL_RenderClear(sdl_renderer_);
 
         RenderTheBackground();
-        Samurai::Instance()->UpdateAnimation();
+        SamuraiAnimationUpdate();
         GameMechanismController::Instance()->UpdatePositionOfEnemies(ar_sk_enemies_);
         EnemiesAnimationUpdate();
         SDL_RenderPresent(sdl_renderer_);

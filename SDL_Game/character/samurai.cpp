@@ -36,6 +36,10 @@ int Samurai::GetYPos() {
     return y_pos_;
 }
 
+SamuraiStateMachine* Samurai::GetSamuraiStateMachine() {
+    return smr_state_machine_;
+}
+
 bool Samurai::GetIsFacingRight() {
     return is_facing_right_;
 }
@@ -177,4 +181,20 @@ void Samurai::RemoveObserser(Observer* _observer) {
 
 void Samurai::NotifyObservers() {
 
+}
+
+int Samurai::GetTopPos() {
+    return y_pos_;
+}
+
+int Samurai::GetBottomPos() {
+    return y_pos_ + game_define::kCharacterSize;
+}
+
+int Samurai::GetLeftPos() {
+    return x_pos_;
+}
+
+int Samurai::GetRightPos() {
+    return x_pos_ + game_define::kCharacterSize;
 }

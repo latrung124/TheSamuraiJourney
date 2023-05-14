@@ -54,3 +54,35 @@ void GameMechanismController::DecreaseRealXPosOfMap(int _x_pos) {
 int GameMechanismController::GetRealXPosOfMap() {
     return real_x_pos_of_map_;
 }
+
+bool GameMechanismController::ColisionCheck(Samurai* _samurai, std::shared_ptr<ArcherSkeleton>& _ar_sk) {
+    // printf("top1: %d, bot1: %d, right1: %d, left1: %d \n", _top1, _bottom1, _right1, _left1);
+    // printf("top2: %d, bot2: %d, right2: %d, left2: %d \n", _top2, _bottom2, _right2, _left2);
+    if (_ar_sk->GetStateMachine()->GetCurrentState()) {
+        //samurai hurt
+    }
+
+    if (_samurai->GetBottomPos() <= _ar_sk->GetTopPos()) {
+        return false;
+    }
+    if (_samurai->GetTopPos() >= _ar_sk->GetBottomPos()) {
+        return false;
+    }
+    if (_samurai->GetRightPos() <= _ar_sk->GetLeftPos()) {
+        return false;
+    }
+    if (_samurai->GetLeftPos() >= _ar_sk->GetRightPos()) {
+        return false;
+    }
+    if (dynamic_cast<SamuraiNormalAttackState*>(_samurai->GetSamuraiStateMachine()->GetCurrentState())) {
+        //run skeleton hurt state
+        printf("run skeleton hurt state! \n");
+        _ar_sk->Hurt();
+    }
+    // return (_left1 < _right2 && _right1 > _left2 && _top1 < _bottom2 && _bottom1 > _top2);
+    return true;
+}
+
+bool GameMechanismController::GuardCheck(int _enemy_x, int _samurai_x) {
+    return (_enemy_x - GUARD_DISTANCE <= _samurai_x && _samurai_x <= _enemy_x + GUARD_DISTANCE);
+}

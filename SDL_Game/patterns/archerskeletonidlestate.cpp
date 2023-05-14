@@ -50,7 +50,6 @@ void ArcherSkeletonIdleState::Enter(ArcherSkeleton* _ar_sk) {
         SDL_RenderCopyEx(GameWorld::Instance()->GetRenderer(), ar_sk_idle_sprites_, &current_frame_rect, &destination_rect_, 0, NULL, SDL_FLIP_HORIZONTAL);
         return;
     }
-
     destination_rect_ = { _ar_sk->GetXPos(), _ar_sk->GetYPos(), game_define::kCharacterSize, game_define::kCharacterSize };
     SDL_RenderCopy(GameWorld::Instance()->GetRenderer(), ar_sk_idle_sprites_, &current_frame_rect, &destination_rect_);
     // SDL_RenderPresent(GameWorld::Instance()->GetRenderer());
@@ -76,6 +75,7 @@ void ArcherSkeletonIdleState::Update(ArcherSkeleton* _ar_sk) {
             _ar_sk->y_pos_ = LAND_Y;
         }
         current_x_pos -= (current_x_pos + game_define::kCharacterSize >= AR_SK_DIFF_IDLE_SPRITES) ? AR_SK_DIFF_IDLE_SPRITES : 0;
+        printf("skeleton current pos x: %d\n", current_x_pos);
         destination_rect_ = { current_x_pos, _ar_sk->GetYPos(), game_define::kCharacterSize, game_define::kCharacterSize };
         SDL_RenderCopyEx(GameWorld::Instance()->GetRenderer(), ar_sk_idle_sprites_, &current_frame_rect, &destination_rect_, 0, NULL, SDL_FLIP_HORIZONTAL);
     } else {

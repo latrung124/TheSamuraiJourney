@@ -1,7 +1,9 @@
 #pragma once
 #include "character/ArcherSkeleton.h"
+#include "character/samurai.h"
 #include <vector>
 #include <memory>
+#include "archerskeletonstatemachine.h"
 class GameMechanismController {
 public:
     GameMechanismController();
@@ -16,6 +18,8 @@ public:
     bool GetIsMapMoving();
 
     void UpdatePositionOfEnemies(std::vector<std::shared_ptr<ArcherSkeleton>>& _ar_sk_enemies);
+    bool GuardCheck(int _enemy_x, int _samurai_x);
+    bool ColisionCheck(Samurai* _samurai, std::shared_ptr<ArcherSkeleton>& _ar_sk);
 
 private:
     int real_x_pos_of_map_;

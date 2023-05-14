@@ -24,6 +24,7 @@ public:
     void EventLoop();
     void RenderTheBackground();
     void EnemiesAnimationUpdate();
+    void SamuraiAnimationUpdate();
 
     void RunningTheGame();
     SDL_Renderer* GetRenderer();

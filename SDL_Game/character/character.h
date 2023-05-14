@@ -12,4 +12,9 @@ public:
     virtual void Die() = 0;
     virtual void Run() = 0;
     virtual void Jump() = 0;
+    virtual int GetBottomPos() = 0;
+    virtual int GetTopPos() = 0;
+    virtual int GetLeftPos() = 0;
+    virtual int GetRightPos() = 0;
+
 };

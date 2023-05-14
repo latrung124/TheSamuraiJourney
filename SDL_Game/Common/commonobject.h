@@ -26,6 +26,7 @@
 #define AR_SK_NUMBER 3
 #define LAND_Y 600
 #define SPAWN_DOWN_OFFSET 1
+#define GUARD_DISTANCE 50
 
 //game visualization
 #define MAX_SCREEN_OF_FIRST_SCENE 5
@@ -43,12 +44,13 @@
 namespace game_define {
     static const std::string kGameName = "The Samurai's Journey";
     static const int kCharacterSize = 128; //pixels
-    const int kXSamuraiInitPos = 50;
+    const int kXSamuraiInitPos = 0;
     const int kYSamuraiInitPos = 600;
 
     static uint32_t kLastUpdateTime = 0;
     static const int kSmrMaxVelocity = 10;
     static const int kSmrWalkVelocity = 1;
+    static const int kSpawnArcherSkeletonXPos[AR_SK_NUMBER] = {300, 600, 900};
 
     enum KeyPressSurfaces{
         KEY_PRESS_SURFACE_DEFAULT,

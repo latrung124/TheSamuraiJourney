@@ -3,6 +3,7 @@
 ArcherSkeleton::ArcherSkeleton() {
     x_pos_ = 300;
     y_pos_ = 600;
+    width_ = 60;
     ar_sk_velocity_x_ = 0;
     ar_sk_velocity_y_ = 0;
     is_facing_right_ = false;
@@ -12,6 +13,8 @@ ArcherSkeleton::ArcherSkeleton() {
 ArcherSkeleton::ArcherSkeleton(int _x_pos, int _y_pos) {
     x_pos_ = _x_pos;
     y_pos_ = _y_pos;
+    spawn_x_pos_ = _x_pos;
+    spawn_y_pos_ = _y_pos;
     ar_sk_velocity_x_ = 0;
     ar_sk_velocity_y_ = 0;
     is_facing_right_ = false;
@@ -41,6 +44,22 @@ int ArcherSkeleton::GetXPos() {
 }
 int ArcherSkeleton::GetYPos() {
     return y_pos_;
+}
+
+int ArcherSkeleton::GetRightPos() {
+    return x_pos_ + width_;
+}
+
+int ArcherSkeleton::GetLeftPos() {
+    return x_pos_;
+}
+
+int ArcherSkeleton::GetTopPos() {
+    return y_pos_;
+}
+
+int ArcherSkeleton::GetBottomPos() {
+    return y_pos_ + game_define::kCharacterSize;
 }
 
 bool ArcherSkeleton::GetIsFacingRight() {
@@ -166,4 +185,11 @@ void ArcherSkeleton::Hurt() {
 
 void ArcherSkeleton::Die() {
 
+}
+
+void ArcherSkeleton::StateAnimationDone() {
+    printf("%s !", __FUNCSIG__);
+    if (sk_state_machine_ != nullptr) {
+        sk_state_machine_->SetState(sk_state_machine_->GetIdleState(), this);
+    }
 }

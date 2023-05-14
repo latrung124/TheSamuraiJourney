@@ -74,10 +74,14 @@ void ArcherSkeletonHurtState::Update(ArcherSkeleton* _ar_sk) {
     } 
     printf("%s frame %d was loaded!\n", __FUNCSIG__, current_frame_);
     ++current_frame_;
-    if (current_frame_/(AR_SK_HURT_FRAME_NUMBER*2) >= AR_SK_HURT_FRAME_NUMBER) current_frame_ = 0;
+    if (current_frame_/(AR_SK_HURT_FRAME_NUMBER*3) >= AR_SK_HURT_FRAME_NUMBER) {
+        //stop state
+        Exit(_ar_sk);
+    }
 }
 
 void ArcherSkeletonHurtState::Exit(ArcherSkeleton* _ar_sk) {
     is_mode_on_ = false;
     current_frame_ = 0;
+    _ar_sk->StateAnimationDone();
 }

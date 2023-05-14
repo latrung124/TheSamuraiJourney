@@ -18,8 +18,10 @@ public:
 
     bool SetState(ArcherSkeletonBaseState* _state, ArcherSkeleton* _ar_sk);
     void StateAnimationUpdate(ArcherSkeleton* _ar_sk);
+    void StateAnimationDone();
     ArcherSkeletonBaseState* GetIdleState();
     ArcherSkeletonBaseState* GetHurtState();
+    ArcherSkeletonBaseState* GetCurrentState();
 
 private:
     ArcherSkeletonIdleState* ar_sk_idle_state_;

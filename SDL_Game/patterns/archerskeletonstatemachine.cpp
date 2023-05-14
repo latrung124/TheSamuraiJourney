@@ -22,6 +22,10 @@ SkeletonStateMachine::~SkeletonStateMachine() {
     }
 }
 
+ArcherSkeletonBaseState* SkeletonStateMachine::GetCurrentState() {
+    return current_state_;
+}
+
 ArcherSkeletonBaseState* SkeletonStateMachine::GetIdleState() {
     return ar_sk_idle_state_;
 }
@@ -43,6 +47,10 @@ void SkeletonStateMachine::StateAnimationUpdate(ArcherSkeleton* _ar_sk) {
     if (current_state_ != nullptr) {
         current_state_->Update(_ar_sk);
     }
+}
+
+void SkeletonStateMachine::StateAnimationDone() {
+    printf("%s \n", __FUNCSIG__);
 }
 
 
