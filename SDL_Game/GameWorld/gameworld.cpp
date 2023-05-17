@@ -11,7 +11,6 @@ GameWorld::GameWorld() {
     start_of_compensation_background_ = 0;
     end_of_original_background_ = WINDOW_WIDTH;
     end_of_compensation_background_ = 0;
-    background_offset_ = 0;
     current_screen_ = 1;
 }
 
@@ -188,13 +187,14 @@ void GameWorld::SamuraiAnimationUpdate() {
 void GameWorld::RenderTheBackground() {
     //get the offset
     if (dynamic_cast<SamuraiWalkState*>(Samurai::Instance()->smr_state_machine_->current_state_)) {
-        GameMechanismController::Instance()->SetIsMapMoving(true);
-        background_offset_ = GAME_MOVING_OFFSET;
+        GameMechanismController::Instance()->UpdatePositionForSamurai(Samurai::Instance());
+        int16_t background_offset = GameMechanismController::Instance()->GetBackgroundOffset();
         if (Samurai::Instance()->GetIsFacingRight()) {
             if (GameMechanismController::Instance()->GetRealXPosOfMap() < MAP_WIDTH) {
-                GameMechanismController::Instance()->IncreaseRealXPosOfMap(background_offset_);
-                original_background_rect_.x = original_background_rect_.x - background_offset_;
-                compensation_background_rect_.x -= background_offset_;
+                //the map moves to left
+                GameMechanismController::Instance()->IncreaseRealXPosOfMap(background_offset);
+                original_background_rect_.x = original_background_rect_.x - background_offset;
+                compensation_background_rect_.x -= background_offset;
                 if (original_background_rect_.x == (-1) * WINDOW_WIDTH) {
                     // reset the position of the background after it met the end
                     original_background_rect_.x = 0;
@@ -203,19 +203,20 @@ void GameWorld::RenderTheBackground() {
             }
         } else {
             if (GameMechanismController::Instance()->GetRealXPosOfMap() > 0) {
-                GameMechanismController::Instance()->DecreaseRealXPosOfMap(background_offset_);
+                //the map moves to right
+                GameMechanismController::Instance()->DecreaseRealXPosOfMap(background_offset);
                 if (original_background_rect_.x == 0) {
                     original_background_rect_.x -= WINDOW_WIDTH;
                     compensation_background_rect_.x = 0;
                 }
-                original_background_rect_.x += background_offset_;
-                compensation_background_rect_.x += background_offset_;
+                original_background_rect_.x += background_offset;
+                compensation_background_rect_.x += background_offset;
             }
         }
 
     } else {
         GameMechanismController::Instance()->SetIsMapMoving(false);
-        background_offset_ = 0;
+        GameMechanismController::Instance()->SetBackgroundOffset();
     }
 
     printf("original background x: %d, compensation background x: %d \n", original_background_rect_.x, compensation_background_rect_.x);

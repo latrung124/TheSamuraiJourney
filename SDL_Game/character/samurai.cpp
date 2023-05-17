@@ -50,7 +50,7 @@ void Samurai::SetXPos(int _smr_velocity_x) {
             x_pos_ += _smr_velocity_x;
     }
     else  {
-        if (x_pos_ >= 0)
+        if (x_pos_ > 0)
             x_pos_ -= _smr_velocity_x;
     }
 }

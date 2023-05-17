@@ -5,6 +5,7 @@ GameMechanismController::GameMechanismController() {
     last_x_pos_map_changed_ = 0;
     is_map_moving_ = false;
     real_x_pos_of_map_ = 0;
+    background_offset_ = 0;
 }
 
 GameMechanismController::~GameMechanismController() {
@@ -21,6 +22,40 @@ GameMechanismController* GameMechanismController::Instance() {
     return game_mechanism_controller_;
 }
 
+void GameMechanismController::SetBackgroundOffset() {
+    if (is_map_moving_) {
+        background_offset_ = 1;
+    } else {
+        background_offset_ = 0;
+    }
+}
+
+int16_t GameMechanismController::GetBackgroundOffset() {
+    return background_offset_;
+}
+
+
+void GameMechanismController::UpdatePositionForSamurai(Samurai* _samurai) {
+    int x_pos = _samurai->GetXPos();
+    int velocity = _samurai->GetVelocityX();
+    if (_samurai->GetIsFacingRight()) {
+        if (x_pos < WINDOW_WIDTH/2) {
+            _samurai->SetXPos(velocity);
+            SetIsMapMoving(false);
+        } else {
+            SetIsMapMoving(true);
+        }
+    } else {
+        if (real_x_pos_of_map_ == 0 && x_pos > 0) {
+            _samurai->SetXPos(velocity);
+            SetIsMapMoving(false);
+        } else {
+            SetIsMapMoving(true);
+        }
+    }
+    SetBackgroundOffset();
+}
+
 void GameMechanismController::UpdatePositionOfEnemies(std::vector<std::shared_ptr<ArcherSkeleton>>& _ar_sk_enemies) {
     if (!is_map_moving_) return;
     if (real_x_pos_of_map_ == 0) return;
@@ -32,6 +67,7 @@ void GameMechanismController::UpdatePositionOfEnemies(std::vector<std::shared_pt
 }
 
 void GameMechanismController::SetIsMapMoving(bool _is_map_moving) {
+    printf("%s is_map_moving: %d\n", __FUNCSIG__, _is_map_moving);
     if (_is_map_moving != is_map_moving_) {
         is_map_moving_ = _is_map_moving;
     }

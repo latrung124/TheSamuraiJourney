@@ -42,6 +42,5 @@ private:
     int16_t end_of_original_background_;
     int16_t start_of_compensation_background_;
     int16_t end_of_compensation_background_;
-    int16_t background_offset_;
     int16_t current_screen_;
 };
