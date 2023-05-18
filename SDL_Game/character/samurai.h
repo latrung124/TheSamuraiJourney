@@ -38,6 +38,8 @@ public:
     void SetYPos(int _smr_velocity_y);
     int GetVelocityX();
     int GetVelocityY();
+    void SetVelocityX(const int& _velocity_x);
+    void SetVelocityY(const int& _velocity_y);
     void SetIsFacingRight(bool _is_facing_right);
     void XPositionChanged();
     void HandleXPosWhenItMovesOutTheMap(int& _current_x_pos);

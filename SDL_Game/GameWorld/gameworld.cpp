@@ -186,7 +186,8 @@ void GameWorld::SamuraiAnimationUpdate() {
 
 void GameWorld::RenderTheBackground() {
     //get the offset
-    if (dynamic_cast<SamuraiWalkState*>(Samurai::Instance()->smr_state_machine_->current_state_)) {
+    if (dynamic_cast<SamuraiWalkState*>(Samurai::Instance()->smr_state_machine_->current_state_)
+    || dynamic_cast<SamuraiRunState*>(Samurai::Instance()->smr_state_machine_->current_state_)) {
         GameMechanismController::Instance()->UpdatePositionForSamurai(Samurai::Instance());
         int16_t background_offset = GameMechanismController::Instance()->GetBackgroundOffset();
         if (Samurai::Instance()->GetIsFacingRight()) {
@@ -216,7 +217,7 @@ void GameWorld::RenderTheBackground() {
 
     } else {
         GameMechanismController::Instance()->SetIsMapMoving(false);
-        GameMechanismController::Instance()->SetBackgroundOffset();
+        GameMechanismController::Instance()->SetBackgroundOffset(0);
     }
 
     printf("original background x: %d, compensation background x: %d \n", original_background_rect_.x, compensation_background_rect_.x);

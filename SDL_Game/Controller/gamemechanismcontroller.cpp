@@ -22,12 +22,8 @@ GameMechanismController* GameMechanismController::Instance() {
     return game_mechanism_controller_;
 }
 
-void GameMechanismController::SetBackgroundOffset() {
-    if (is_map_moving_) {
-        background_offset_ = 1;
-    } else {
-        background_offset_ = 0;
-    }
+void GameMechanismController::SetBackgroundOffset(int _off_set) {
+    background_offset_ = _off_set;
 }
 
 int16_t GameMechanismController::GetBackgroundOffset() {
@@ -42,18 +38,21 @@ void GameMechanismController::UpdatePositionForSamurai(Samurai* _samurai) {
         if (x_pos < WINDOW_WIDTH/2) {
             _samurai->SetXPos(velocity);
             SetIsMapMoving(false);
+            SetBackgroundOffset(0);
         } else {
             SetIsMapMoving(true);
+            SetBackgroundOffset(velocity);
         }
     } else {
         if (real_x_pos_of_map_ == 0 && x_pos > 0) {
             _samurai->SetXPos(velocity);
             SetIsMapMoving(false);
+            SetBackgroundOffset(0);
         } else {
             SetIsMapMoving(true);
+            SetBackgroundOffset(velocity);
         }
     }
-    SetBackgroundOffset();
 }
 
 void GameMechanismController::UpdatePositionOfEnemies(std::vector<std::shared_ptr<ArcherSkeleton>>& _ar_sk_enemies) {

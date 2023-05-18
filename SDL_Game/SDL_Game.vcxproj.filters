@@ -93,6 +93,18 @@
     <ClCompile Include="Controller\gamemechanismcontroller.cpp">
       <Filter>Header Files</Filter>
     </ClCompile>
+    <ClCompile Include="patterns\archerskeletonstatemachine.cpp">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="patterns\archerskeletonbasestate.cpp">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="patterns\samuraihurtstate.cpp">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="patterns\samurairunstate.cpp">
+      <Filter>Header Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Common\commonobject.h">
@@ -177,6 +189,18 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Controller\gamemechanismcontroller.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="patterns\archerskeletonstatemachine.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="patterns\archerskeletonbasestate.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="patterns\samuraihurtstate.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="patterns\samurairunstate.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -42,6 +42,7 @@ void SamuraiIdleState::Enter() {
     }
     SDL_Rect current_frame_rect = smr_sprites_rect_[current_frame_];
     is_facing_right_ = Samurai::Instance()->GetIsFacingRight();
+    Samurai::Instance()->SetVelocityX(0);
     if (!is_facing_right_) {
         int current_x_pos = Samurai::Instance()->GetXPos();
         current_x_pos -= (current_x_pos + game_define::kCharacterSize >= DIFF_IDLE_SPRITES) ? DIFF_IDLE_SPRITES : 0;

@@ -7,6 +7,7 @@
 #include "samuraidefendstate.h"
 #include "samuraiwalkstate.h"
 #include "samuraihurtstate.h"
+#include "samurairunstate.h"
 
 class StateMachine {
 public:
@@ -24,6 +25,7 @@ public:
     virtual bool SetState(BaseState* _state) override;
     virtual void StateAnimationDone() override;
     BaseState* GetCurrentState();
+    BaseState* GetSamuraiRunState();
 public:
     SamuraiIdleState* smr_idle_state_;
     SamuraiNormalAttackState* smr_normal_attack_state_;
@@ -32,4 +34,5 @@ public:
     SamuraiDefendState* smr_defend_state_;
     SamuraiWalkState* smr_walk_state_;
     SamuraiHurtState* smr_hurt_state_;
+    SamuraiRunState* smr_run_state_;
 };

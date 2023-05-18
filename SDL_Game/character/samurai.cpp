@@ -48,14 +48,28 @@ void Samurai::SetXPos(int _smr_velocity_x) {
     if (is_facing_right_) {
         if (x_pos_ <= WINDOW_WIDTH - game_define::kCharacterSize/2)
             x_pos_ += _smr_velocity_x;
+        if (x_pos_ > WINDOW_WIDTH/2) x_pos_ = WINDOW_WIDTH/2;
     }
     else  {
         if (x_pos_ > 0)
             x_pos_ -= _smr_velocity_x;
+        if (x_pos_ < 0) x_pos_ = 0;
     }
 }
 void Samurai::SetYPos(int _smr_velocity_y) {
     y_pos_ += _smr_velocity_y;
+}
+
+void Samurai::SetVelocityX(const int& _velocity_x) {
+    if (smr_velocity_x_ != _velocity_x) {
+        smr_velocity_x_ = _velocity_x;
+    }
+}
+
+void Samurai::SetVelocityY(const int& _velocity_y) {
+    if (smr_velocity_y_ != _velocity_y) {
+        smr_velocity_y_ = _velocity_y;
+    }
 }
 
 int Samurai::GetVelocityX() {
@@ -142,7 +156,14 @@ void Samurai::Idle() {
 }
 
 void Samurai::Run() {
-
+    printf("Samurai goes to the walk state! \n");
+    if (dynamic_cast<SamuraiRunState*>(smr_state_machine_->GetCurrentState())) {
+        printf("Samurai still in the run state! \n");
+        return;
+    }
+    if (smr_state_machine_->SetState(smr_state_machine_->GetSamuraiRunState())) {
+        printf("samurai changed to run state! \n");
+    }
 }
 
 void Samurai::Jump() {

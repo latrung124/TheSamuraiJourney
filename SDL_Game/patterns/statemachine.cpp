@@ -10,6 +10,7 @@ SamuraiStateMachine::SamuraiStateMachine() {
     smr_defend_state_ = new SamuraiDefendState();
     smr_walk_state_ = new SamuraiWalkState();
     smr_hurt_state_ = new SamuraiHurtState();
+    smr_run_state_ = new SamuraiRunState();
 }
 
 SamuraiStateMachine::~SamuraiStateMachine() {
@@ -37,6 +38,10 @@ SamuraiStateMachine::~SamuraiStateMachine() {
         delete smr_hurt_state_;
         smr_hurt_state_ = nullptr;
     }
+    if (smr_run_state_ != nullptr) {
+        delete smr_run_state_;
+        smr_run_state_ = nullptr;
+    }
 
 }
 
@@ -55,4 +60,8 @@ void SamuraiStateMachine::StateAnimationDone() {
 
 BaseState* SamuraiStateMachine::GetCurrentState() {
     return current_state_;
+}
+
+BaseState* SamuraiStateMachine::GetSamuraiRunState() {
+    return smr_run_state_;
 }

@@ -15,7 +15,7 @@ public:
     void IncreaseRealXPosOfMap(int _x_pos);
     void DecreaseRealXPosOfMap(int _x_pos);
     void SetIsMapMoving(bool _is_map_moving);
-    void SetBackgroundOffset();
+    void SetBackgroundOffset(int _off_set);
     bool GetIsMapMoving();
     int16_t GetBackgroundOffset();
 

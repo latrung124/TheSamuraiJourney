@@ -48,6 +48,7 @@ void SamuraiWalkState::Enter() {
     }
     SDL_Rect current_frame_rect = smr_sprites_rect_[current_frame_];
     is_facing_right_ = Samurai::Instance()->GetIsFacingRight();
+    Samurai::Instance()->SetVelocityX(game_define::kSmrWalkVelocity);
 
     //cause the samurai walk sprites has a different about 20 px in the positive x position
     // so need to calculate the x, y pos of the samurai when he walks

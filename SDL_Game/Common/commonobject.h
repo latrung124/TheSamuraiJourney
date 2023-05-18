@@ -50,6 +50,7 @@ namespace game_define {
     static uint32_t kLastUpdateTime = 0;
     static const int kSmrMaxVelocity = 10;
     static const int kSmrWalkVelocity = 1;
+    static const int kSmrRunVelocity = 2;
     static const int kSpawnArcherSkeletonXPos[AR_SK_NUMBER] = {300, 600, 900};
 
     enum KeyPressSurfaces{
