@@ -1,13 +1,18 @@
 #include "ArcherSkeleton.h"
+#include "GameWorld/gameworld.h"
 #include "archerskeletonstatemachine.h"
 ArcherSkeleton::ArcherSkeleton() {
     x_pos_ = 300;
     y_pos_ = 600;
     width_ = 60;
+    health_point_ = ARCHER_SKELETON_HP;
     ar_sk_velocity_x_ = 0;
     ar_sk_velocity_y_ = 0;
     is_facing_right_ = false;
+    is_collision_ = false;
     sk_state_machine_ = new SkeletonStateMachine();
+    health_border_rect_ = {x_pos_, y_pos_ + 50, WIDTH_HP_PROGRESS, HEIGHT_HP_PROGRESS};
+    health_progress_rect_ = {x_pos_ + BORDER_PROGRESS_WIDTH, y_pos_ + 50 + BORDER_PROGRESS_WIDTH, WIDTH_HP_PROGRESS - BORDER_PROGRESS_WIDTH*2, HEIGHT_HP_PROGRESS - BORDER_PROGRESS_WIDTH*2};
 }
 
 ArcherSkeleton::ArcherSkeleton(int _x_pos, int _y_pos) {
@@ -18,7 +23,12 @@ ArcherSkeleton::ArcherSkeleton(int _x_pos, int _y_pos) {
     ar_sk_velocity_x_ = 0;
     ar_sk_velocity_y_ = 0;
     is_facing_right_ = false;
+    is_collision_ = false;
+    health_point_ = ARCHER_SKELETON_HP;
     sk_state_machine_ = new SkeletonStateMachine();
+    health_border_rect_ = {x_pos_, y_pos_ + 50, WIDTH_HP_PROGRESS, HEIGHT_HP_PROGRESS};
+    health_progress_rect_ = {x_pos_ + BORDER_PROGRESS_WIDTH, y_pos_ + 50 + BORDER_PROGRESS_WIDTH, WIDTH_HP_PROGRESS - BORDER_PROGRESS_WIDTH*2, HEIGHT_HP_PROGRESS - BORDER_PROGRESS_WIDTH*2};
+
 }
 
 ArcherSkeleton::~ArcherSkeleton() {
@@ -104,6 +114,46 @@ void ArcherSkeleton::XPositionChanged() {
     printf("%s x_pos: %d \n", __FUNCSIG__, x_pos_);
 }
 
+void ArcherSkeleton::SetHealthPoint(int _health_point) {
+    int health_point = health_point_ - _health_point;
+    health_point = health_point < 0 ? 0 : health_point;
+    health_point_ = health_point;
+}
+
+int ArcherSkeleton::GetHealthPoint() {
+    return health_point_;
+}
+
+
+void ArcherSkeleton::SetHealthProgressRect() {
+    if (health_progress_rect_.w != GetHealthPoint()) {
+        health_progress_rect_.w = GetHealthPoint();
+    }
+}
+
+void ArcherSkeleton::SetIsCollision(bool _is_collision) {
+    if (is_collision_ != _is_collision) {
+        is_collision_ = _is_collision;
+    }
+}
+
+bool ArcherSkeleton::GetIsCollision() {
+    return is_collision_;
+}
+
+void ArcherSkeleton::HandleHurtEffect() {
+    //handle hurt effect
+}
+
+void ArcherSkeleton::ShowHealthPoint() {
+    health_border_rect_ = {x_pos_, y_pos_ + 50, WIDTH_HP_PROGRESS, HEIGHT_HP_PROGRESS};
+    SDL_SetRenderDrawColor(GameWorld::Instance()->GetRenderer() , enemy_border_hp_color_.r, enemy_border_hp_color_.g, enemy_border_hp_color_.b, 0xFF);
+    SDL_RenderDrawRect(GameWorld::Instance()->GetRenderer() , &health_border_rect_);
+    health_progress_rect_ = {x_pos_ + BORDER_PROGRESS_WIDTH, y_pos_ + 50 + BORDER_PROGRESS_WIDTH, GetHealthPoint() == 0 ? 0 : GetHealthPoint() - BORDER_PROGRESS_WIDTH*2, HEIGHT_HP_PROGRESS - BORDER_PROGRESS_WIDTH*2};
+    SDL_SetRenderDrawColor(GameWorld::Instance()->GetRenderer() , enemy_hp_color_.r, enemy_hp_color_.g, enemy_hp_color_.b, 0xFF);
+    SDL_RenderFillRect(GameWorld::Instance()->GetRenderer(), &health_progress_rect_);
+}
+
 void ArcherSkeleton::NormalAttack() {
     // printf("ArcherSkeleton goes to the normal attack state! \n");
     // if (sk_state_machine_->SetState(sk_state_machine_->smr_normal_attack_state_)) {
@@ -175,6 +225,9 @@ void ArcherSkeleton::Walk() {
 }
 
 void ArcherSkeleton::Hurt() {
+    if (dynamic_cast<ArcherSkeletonHurtState*>(sk_state_machine_->GetCurrentState())) {
+        return;
+    }
     printf("ArcherSkeleton goes to the hurt state! \n");
     if (sk_state_machine_ != nullptr) {
         sk_state_machine_->SetState(sk_state_machine_->GetHurtState(), this);

@@ -1,6 +1,9 @@
 #pragma once
 #include "character.h"
+#define ARCHER_SKELETON_HP 50
+#include "Common/commonobject.h"
 class SkeletonStateMachine;
+class GameWorld;
 class ArcherSkeleton : public Character {
 public:
     ArcherSkeleton();
@@ -40,6 +43,13 @@ public:
     int GetVelocityY();
     void SetIsFacingRight(bool _is_facing_right);
     void XPositionChanged();
+    void SetHealthPoint(int _health_point);
+    int GetHealthPoint();
+    void ShowHealthPoint();
+    void SetHealthProgressRect();
+    void SetIsCollision(bool _is_collision);
+    bool GetIsCollision();
+    void HandleHurtEffect();
 
     SkeletonStateMachine* GetStateMachine();
 
@@ -53,4 +63,10 @@ public:
     int ar_sk_velocity_y_;
     bool is_facing_right_;
     int width_;
+    int health_point_;
+    game_define::EnemyHPColor enemy_hp_color_;
+    game_define::EnemyBorderHPColor enemy_border_hp_color_;
+    SDL_Rect health_border_rect_;
+    SDL_Rect health_progress_rect_;
+    bool is_collision_;
 };

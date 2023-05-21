@@ -93,29 +93,52 @@ int GameMechanismController::GetRealXPosOfMap() {
 bool GameMechanismController::ColisionCheck(Samurai* _samurai, std::shared_ptr<ArcherSkeleton>& _ar_sk) {
     // printf("top1: %d, bot1: %d, right1: %d, left1: %d \n", _top1, _bottom1, _right1, _left1);
     // printf("top2: %d, bot2: %d, right2: %d, left2: %d \n", _top2, _bottom2, _right2, _left2);
+    bool is_collision = false;
     if (_ar_sk->GetStateMachine()->GetCurrentState()) {
         //samurai hurt
     }
 
+    //health progress will be update if the collision is changed to false
     if (_samurai->GetBottomPos() <= _ar_sk->GetTopPos()) {
-        return false;
+        return is_collision;
     }
     if (_samurai->GetTopPos() >= _ar_sk->GetBottomPos()) {
-        return false;
+        return is_collision;
     }
     if (_samurai->GetRightPos() <= _ar_sk->GetLeftPos()) {
-        return false;
+        return is_collision;
     }
     if (_samurai->GetLeftPos() >= _ar_sk->GetRightPos()) {
-        return false;
+        return is_collision;
     }
+    is_collision = true;
+    //if skeleton is changed state from not collision to collision.
+    // if (_ar_sk->GetIsCollision()) {
+    //     //still collision -> do nothing
+    //     return true;
+    // } else {
+    //     // from not collision change to collision
+    //     _ar_sk->SetIsCollision(is_collision);
+    // }
     if (dynamic_cast<SamuraiNormalAttackState*>(_samurai->GetSamuraiStateMachine()->GetCurrentState())) {
         //run skeleton hurt state
-        printf("run skeleton hurt state! \n");
+        printf("skeleton hurt by normal attack state! \n");
+
+        _ar_sk->SetIsCollision(is_collision);
         _ar_sk->Hurt();
+    } else if (dynamic_cast<SamuraiSpecialAttackState*>(_samurai->GetSamuraiStateMachine()->GetCurrentState())) {
+        printf("skeleton hurt by Special attack state! \n");
+        _ar_sk->SetIsCollision(is_collision);
+        _ar_sk->Hurt();
+        // _ar_sk->SetHealthPoint(SAMURAI_SPECIAL_DAMAGE);
+    } else if (dynamic_cast<SamuraiStrongAttackState*>(_samurai->GetSamuraiStateMachine()->GetCurrentState())) {
+        printf("skeleton hurt by Strong attack state! \n");
+        _ar_sk->SetIsCollision(is_collision);
+        _ar_sk->Hurt();
+        // _ar_sk->SetHealthPoint(SAMURAI_STRONG_DAMAGE);
     }
     // return (_left1 < _right2 && _right1 > _left2 && _top1 < _bottom2 && _bottom1 > _top2);
-    return true;
+    return is_collision;
 }
 
 bool GameMechanismController::GuardCheck(int _enemy_x, int _samurai_x) {

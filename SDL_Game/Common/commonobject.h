@@ -27,6 +27,15 @@
 #define LAND_Y 600
 #define SPAWN_DOWN_OFFSET 1
 #define GUARD_DISTANCE 50
+#define WIDTH_HP_PROGRESS 50
+#define HEIGHT_HP_PROGRESS 5
+#define BORDER_PROGRESS_WIDTH 1
+
+
+//enemies statistics
+#define SAMURAI_NORMAL_DAMAGE 10
+#define SAMURAI_SPECIAL_DAMAGE 50
+#define SAMURAI_STRONG_DAMAGE 25
 
 //game visualization
 #define MAX_SCREEN_OF_FIRST_SCENE 5
@@ -60,6 +69,28 @@ namespace game_define {
         KEY_PRESS_SURFACE_LEFT,
         KEY_PRESS_SURFACE_RIGHT,
         KEY_PRESS_SURFACE_TOTAL
+    };
+
+    struct EnemyHPColor {
+        EnemyHPColor() {
+            r = 249;
+            g = 155;
+            b = 125;
+        }
+        uint8_t r;
+        uint8_t g;
+        uint8_t b;
+    };
+    
+    struct EnemyBorderHPColor {
+        EnemyBorderHPColor() {
+            r = 176;
+            g = 71;
+            b = 89;
+        }
+        uint8_t r;
+        uint8_t g;
+        uint8_t b;
     };
 }
 

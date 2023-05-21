@@ -158,6 +158,7 @@ bool GameWorld::InitializeTheEnemies() {
     for (int i = 0; i < ar_sk_enemies_.size();++i) {
         if (ar_sk_enemies_[i] != nullptr) {
             ar_sk_enemies_[i]->Idle();
+            ar_sk_enemies_[i]->ShowHealthPoint();
         }
     }
     return true;
@@ -174,6 +175,7 @@ void GameWorld::EnemiesAnimationUpdate() {
             } else {
                 printf("no collision !!!\n");
             }
+            ar_sk_enemies_[i]->ShowHealthPoint();
             ar_sk_enemies_[i]->StateAnimationUpdate();
         }
     }
