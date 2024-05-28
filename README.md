@@ -20,3 +20,7 @@ Overall, the game aims to provide an engaging and challenging experience for pla
 # Detailed designed
 1. Class diagram
 ![class_diagram drawio](https://github.com/latrung124/TheSamuraiJourney/assets/53443778/5d5e17e6-6418-4e8f-89b5-bc069562b3ec)
+
+
+# Preview
+![image](https://github.com/latrung124/TheSamuraiJourney/assets/53443778/dc8de8c3-96da-4c4e-aeaa-7c36654625e7)
