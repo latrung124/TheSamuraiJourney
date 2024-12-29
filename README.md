@@ -23,4 +23,4 @@ Overall, the game aims to provide an engaging and challenging experience for pla
 
 
 # Preview
-![image](https://github.com/latrung124/TheSamuraiJourney/assets/53443778/dc8de8c3-96da-4c4e-aeaa-7c36654625e7)
+[![Watch the video](https://img.youtube.com/vi/zPEmX_WAhsc/0.jpg)](https://www.youtube.com/watch?v=zPEmX_WAhsc&feature=youtu.be)
